@@ -19,16 +19,16 @@ func (m *Machine) AddState(state State, handler Handler) {
 	m.Handlers[state] = handler
 }
 
-func (m *Machine) run(context []rune) bool {
+func (m *Machine) run(input []rune) bool {
 	if handler, present := m.Handlers[m.StartState]; present {
 		for {
-			nextState, nextContext := handler(context)
+			nextState, nextContext := handler(input)
 			if nextState != nil {
 				if nextState.isAcceptState() {
 					return true
 				} else {
 					handler, present = m.Handlers[nextState]
-					context = nextContext
+					input = nextContext
 				}
 			} else {
 				return false
