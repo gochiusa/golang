@@ -15,6 +15,7 @@ func (s *state) isAcceptState() bool {
 type acceptState struct {
 	id string
 }
+
 func (s *acceptState) isAcceptState() bool {
 	return true
 }
@@ -22,7 +23,7 @@ func (s *acceptState) isAcceptState() bool {
 func TestStateMachine1(t *testing.T) {
 	first := &state{id: "1"}
 	second := &acceptState{id: "2"}
-	
+
 	var firstToSecond Handler = func(context []rune) (State, []rune) {
 		if context[0] == 'a' {
 			return second, context
